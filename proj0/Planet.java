@@ -5,7 +5,7 @@ public class Planet{
 	public double yyVel;
 	public double mass;
 	public String imgFileName;
-	public static double G=6.67e-11;/**科学计数法？*/
+	private static double G=6.67e-11;/**科学计数法？*/
 	public Planet(double xP,double yP,double xV,double yV,double m,String img)
 	{
 		xxPos=xP;
@@ -19,12 +19,12 @@ public class Planet{
 	{
 		this.xxPos=p.xxPos;
 		this.yyPos=p.yyPos;
-		this.xxVel=p.yyVel;
+		this.xxVel=p.xxVel;
 		this.yyVel=p.yyVel;
 		this.mass=p.mass;
 		this.imgFileName=p.imgFileName;
 	}
-	public boolean equals(Planet p)
+	private boolean equals(Planet p)
 	{
 		if(this.xxPos==p.xxPos)
 			if(this.yyPos==p.yyPos)

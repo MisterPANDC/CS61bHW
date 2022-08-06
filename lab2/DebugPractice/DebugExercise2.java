@@ -6,20 +6,25 @@ public class DebugExercise2 {
     /** Returns the max of a and b. Do not step into this function. 
       * This function may have a bug, but if it does, you should find it
       * by stepping over, not into. */
-    public static int max(int a, int b) {
+    /**public static int max(int a, int b) {
         int w = (b - a) >> 31;
         /* If you're stepping into this function, click the
-           step out button because you're not going to learn anything. */
+           step out button because you're not going to learn anything.
         int z = ~(b - a) >> 31;
 
         int max = b & w | a & z;
         return max;
-    }
+    }*/
 
 
     /** Returns the sum of a and b. Do not step into this function. 
       * This function may have a bug, but if it does, you should find it
-      * by stepping over, not into. */    
+      * by stepping over, not into. */
+    /*错误1，应找出大的值，实际返回小的值*/
+    public static int max(int a,int b){
+        if(a>b)return a;
+        else return b;
+    }
     public static int add(int a, int b) {
         int x = a, y = b;
         /* If you're stepping into this function, click the
@@ -60,7 +65,11 @@ public class DebugExercise2 {
         int i = 0;
         int sum = 0;
         while (i < x.length) {
+            /**
             sum = sum + add(sum, x[i]);
+             错误2，这里多加了一次
+             */
+            sum=add(sum,x[i]);
             i = i + 1;
         }
         return sum;

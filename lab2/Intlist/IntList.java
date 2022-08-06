@@ -82,7 +82,22 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        /*IntList ltemp=A;
+        while(ltemp.rest!=null)
+        {
+            ltemp.first=ltemp.rest.first;
+            ltemp.rest=ltemp.rest.rest;/*开始没加这句导致死循环
+        }
+        ltemp.rest=B;
+        return A;
+        */
+        IntList temp=new IntList(A.first,A.rest);
+        while(temp.rest.rest!=null)
+        {
+            temp=new IntList(temp.rest.first,temp.rest.rest);
+        }
+        temp.rest.rest=B;
+        return A;
     }
 
     /**
@@ -91,7 +106,17 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+       IntList ans=new IntList(A.first, A.rest);
+       IntList ptr=ans;
+       while(ptr.rest!=null)
+       {
+           ptr.rest=new IntList(ptr.rest.first,ptr.rest.rest);
+           /*前面一定要先构建ptr.rest，才能把ptr舍弃的部分与新部分建立联系，好让ans之后访问*/
+           ptr=ptr.rest;
+           /*别忘记还要前进一步*/
+       }
+       ptr.rest=B;
+       return ans;
     }
 
 

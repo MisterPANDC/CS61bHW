@@ -92,6 +92,11 @@ public class IntList {
         return A;
         */
         IntList temp=new IntList(A.first,A.rest);
+        if(temp.rest==null)
+        {
+            A.rest=B;
+            return A;
+        }
         while(temp.rest.rest!=null)
         {
             temp=new IntList(temp.rest.first,temp.rest.rest);

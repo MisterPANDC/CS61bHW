@@ -1,15 +1,17 @@
 public class ArrayDeque<T> {
     private int size = 0;
     private T[] array = (T[]) new Object[8];
-    private int fptr = 3;
-    private int lptr = 3;
-
+    private int fptr = 4;
+    private int lptr = 2;
+/**这种设计保证在空集中加第一个时，两个指针指向一样*/
     public ArrayDeque() {
         size = 0;
     }
 
     private ArrayDeque(T x) {
         size = 1;
+        fptr=3;
+        lptr=3;
         array[fptr] = x;
         /**这里不移动指针，因为之后add时候会先移动*/
     }
@@ -22,6 +24,9 @@ public class ArrayDeque<T> {
     }
      */
     public void addFirst(T x) {
+        if (size == 0) {
+            lptr = 3;
+        }
         size = size + 1;
         if (size > array.length) {
             /**copy(array.length * 2);*/
@@ -35,6 +40,9 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T x) {
+        if (size == 0) {
+            fptr = 3;
+        }
         size = size + 1;
         if (size > array.length) {
             acopy(array.length * 2);
@@ -148,5 +156,18 @@ public class ArrayDeque<T> {
      }
      public T get(int index) {
         return array[fptr + index];
+     }
+     public static void main(String[] args)
+     {
+         ArrayDeque<Integer> test = new ArrayDeque<>();
+         test.addLast(0);
+         test.addLast(0);
+         test.addLast(0);
+         test.addLast(0);
+         test.addLast(0);
+         test.addLast(0);
+         test.addLast(0);
+         test.addLast(0);
+         test.get(0);
      }
 }

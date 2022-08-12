@@ -99,6 +99,9 @@ public class LinkedListDeque<T>{
     }
     public T removeFirst()
     {
+        if(size == 0) {
+            return null;
+        }
         size=size-1;
         node temp=new node(sentinel.next);
         sentinel.next.next.pre=sentinel;
@@ -107,6 +110,9 @@ public class LinkedListDeque<T>{
     }
     public T removeLast()
     {
+        if(size == 0) {
+            return null;
+        }
         size=size-1;
         node temp=new node(sentinel.pre);
         sentinel.pre.pre.next=sentinel;
@@ -127,7 +133,7 @@ public class LinkedListDeque<T>{
             return ptr.con;
         }
     }
-    public T getRecursive_(int index)
+    private T getRecursiveworong(int index)
     {
         if(index+1>size) return null;
         /**else return getRecursive(index-1).next
@@ -141,7 +147,7 @@ public class LinkedListDeque<T>{
         if(index+1>size) return null;
         else return this.sentinel.next.getRecursivehelper(index);
     }
-    public static void main(String[] args)
+    private static void main(String[] args)
     {
       LinkedListDeque<Integer> test=new LinkedListDeque<>(10);
       test.addFirst(5);

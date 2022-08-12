@@ -25,6 +25,7 @@ public class ArrayDeque<T> {
      */
     public void addFirst(T x) {
         if (size == 0) {
+            fptr = 4;
             lptr = 3;
         }
         size = size + 1;
@@ -41,6 +42,7 @@ public class ArrayDeque<T> {
 
     public void addLast(T x) {
         if (size == 0) {
+            lptr = 2;
             fptr = 3;
         }
         size = size + 1;
@@ -157,17 +159,33 @@ public class ArrayDeque<T> {
      public T get(int index) {
         return array[fptr + index];
      }
-     public static void main(String[] args)
+     private static void main(String[] args)
      {
          ArrayDeque<Integer> test = new ArrayDeque<>();
+         test.addLast(1);
+         test.addLast(2);
+         test.addLast(3);
+         test.addLast(4);
+         test.addLast(5);
+         test.addLast(6);
+         test.addLast(7);
+         test.addLast(8);
+         int a = test.get(0);
          test.addLast(0);
-         test.addLast(0);
-         test.addLast(0);
-         test.addLast(0);
-         test.addLast(0);
-         test.addLast(0);
-         test.addLast(0);
-         test.addLast(0);
-         test.get(0);
+         a = test.get(0);
+         test.addFirst(11);
+         test.addFirst(12);
+         test.removeFirst();
+         test.removeFirst();
+         test.removeFirst();
+         test.removeFirst();
+         test.removeFirst();
+         test.removeFirst();
+         test.removeFirst();
+         test.removeFirst();
+         test.removeFirst();
+         a = test.get(1);
+         test.removeFirst();
+         test.removeFirst();
      }
 }

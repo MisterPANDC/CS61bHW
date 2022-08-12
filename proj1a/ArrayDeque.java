@@ -1,6 +1,6 @@
 public class ArrayDeque<T> {
     private int size = 0;
-    T[] array = (T[]) new Object[8];
+    private T[] array = (T[]) new Object[8];
     private int fptr = 3;
     private int lptr = 3;
 
@@ -8,7 +8,7 @@ public class ArrayDeque<T> {
         size = 0;
     }
 
-    public ArrayDeque(T x) {
+    private ArrayDeque(T x) {
         size = 1;
         array[fptr] = x;
         /**这里不移动指针，因为之后add时候会先移动*/
@@ -76,7 +76,7 @@ public class ArrayDeque<T> {
         lptr=fptr+this.size;
     }
      */
-    public void acopy(int newsize) {
+    private void acopy(int newsize) {
         T[] narray = (T[]) new Object[newsize];
         int ptr = fptr;
         int i = 0;
@@ -92,7 +92,7 @@ public class ArrayDeque<T> {
         fptr = 0;
         lptr = i - 1; /**这里的处理也应该有所不同 本应该在size上做文章，但是操作都是先size变化之后再变*/
     }
-    public void rcopy(int newsize) {
+    private void rcopy(int newsize) {
         T[] narray = (T[]) new Object[newsize];
         int ptr = fptr;
         int i = 0;
@@ -108,7 +108,10 @@ public class ArrayDeque<T> {
         fptr = 0;
         lptr = i - 1; /**这里的处理也应该有所不同 本应该在size上做文章，但是操作都是先size变化之后再变*/
     }
-     public T removeFirst() {
+     public T removeFirst() { /**错误在于空集不能再减了*/
+        if (size == 0) {
+            return null;
+        }
         size = size - 1;
         if (array.length >= 16) {
             if (size < array.length / 4) {
@@ -126,6 +129,9 @@ public class ArrayDeque<T> {
      }
 
      public T removeLast() {
+         if (size == 0) {
+             return null;
+         }
         size = size - 1;
          if (array.length >= 16) {
              if (size < array.length / 4) {
@@ -142,8 +148,5 @@ public class ArrayDeque<T> {
      }
      public T get(int index) {
         return array[fptr + index];
-     }
-     public static void main(String[] args) {
-        return;
      }
 }

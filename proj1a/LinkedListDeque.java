@@ -1,6 +1,6 @@
 public class LinkedListDeque<T>{
     private int size=0;
-    node sentinel= new node();
+    private node sentinel= new node();
     private class node{
         node pre;
         T con;
@@ -41,7 +41,7 @@ public class LinkedListDeque<T>{
         this.sentinel.next=this.sentinel;
         this.sentinel.pre=this.sentinel;
     }
-    public LinkedListDeque(LinkedListDeque other)
+    private LinkedListDeque(LinkedListDeque other)
     {
         this.size= other.size();/**private 的影响？*/
         this.sentinel=new node(other.sentinel);

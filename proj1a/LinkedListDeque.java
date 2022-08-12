@@ -1,11 +1,11 @@
-public class LinkedListDeque<item>{
+public class LinkedListDeque<T>{
     private int size=0;
     node sentinel= new node();
-    public class node{
+    private class node{
         node pre;
-        item con;
+        T con;
         node next;
-        public node(item x)
+        public node(T x)
         {
             con=x;
         }
@@ -21,13 +21,13 @@ public class LinkedListDeque<item>{
             this.pre=x.pre;
             this.con=x.con;
         }
-        public item getRecursivehelper(int index)
+        public T getRecursivehelper(int index)
         {
             if(index==0) return this.con;
             else return this.next.getRecursivehelper(index-1);
         }
     }
-    private LinkedListDeque(item x)
+    private LinkedListDeque(T x)
     {
         size=1;
         sentinel.next=new node(x);
@@ -57,7 +57,7 @@ public class LinkedListDeque<item>{
         ptr2.next=this.sentinel;
         ptr2.next.pre=ptr2;/**再来一次，实现sentinel的初始化*/
     }
-    public void addFirst(item x)
+    public void addFirst(T x)
     {
         node temp=new node(x);
         temp.next=this.sentinel.next;
@@ -68,7 +68,7 @@ public class LinkedListDeque<item>{
         /**这里是否this加不加无所谓,因为名称不矛盾？*/
         size=size+1;
     }
-    public void addLast(item x)
+    public void addLast(T x)
     {
         size=size+1;
         node temp=new node(x);
@@ -97,7 +97,7 @@ public class LinkedListDeque<item>{
         }
         return;
     }
-    public item removeFirst()
+    public T removeFirst()
     {
         size=size-1;
         node temp=new node(sentinel.next);
@@ -105,7 +105,7 @@ public class LinkedListDeque<item>{
         sentinel.next=sentinel.next.next;
         return temp.con;
     }
-    public item removeLast()
+    public T removeLast()
     {
         size=size-1;
         node temp=new node(sentinel.pre);
@@ -113,7 +113,7 @@ public class LinkedListDeque<item>{
         sentinel.pre=sentinel.pre.pre;
         return temp.con;
     }
-    public item get(int index)
+    public T get(int index)
     {
         if(index+1>size) return null;
         else {
@@ -127,7 +127,7 @@ public class LinkedListDeque<item>{
             return ptr.con;
         }
     }
-    public item getRecursive_(int index)
+    public T getRecursive_(int index)
     {
         if(index+1>size) return null;
         /**else return getRecursive(index-1).next
@@ -136,7 +136,7 @@ public class LinkedListDeque<item>{
          这样也不对，因为LLD中加入了sentinel,或许应该在node中使用*/
         else return null;
     }
-    public item getRecursive(int index)
+    public T getRecursive(int index)
     {
         if(index+1>size) return null;
         else return this.sentinel.next.getRecursivehelper(index);

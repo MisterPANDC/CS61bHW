@@ -108,7 +108,7 @@ public class ArrayDeque<T> {
         fptr = 0;
         lptr = i - 1; /**这里的处理也应该有所不同 本应该在size上做文章，但是操作都是先size变化之后再变*/
     }
-     public void removeFirst() {
+     public T removeFirst() {
         size = size - 1;
         if (array.length >= 16) {
             if (size < array.length / 4) {
@@ -116,28 +116,34 @@ public class ArrayDeque<T> {
             }
             /**fptr已经重置*/
         }
+        T ans = array[fptr];
         array[fptr] = null;
         fptr++;
         if (fptr > array.length - 1) {
             fptr = fptr - array.length;
         }
+        return ans;
      }
 
-     public void removeLast() {
+     public T removeLast() {
         size = size - 1;
          if (array.length >= 16) {
              if (size < array.length / 4) {
                  rcopy(array.length / 2);
              }
          }
+         T ans = array[lptr];
          array[lptr] = null;
          lptr--;
          if (lptr < 0) {
              lptr = lptr + array.length;
          }
-
+         return ans;
      }
      public T get(int index) {
         return array[fptr + index];
+     }
+     public static void main(String[] args) {
+        return;
      }
 }

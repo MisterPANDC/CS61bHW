@@ -157,6 +157,9 @@ public class ArrayDeque<T> {
          return ans;
      }
      public T get(int index) {
+        if (index >= size) {
+            return null;
+        }
         return array[fptr + index];
      }
      private static void main(String[] args)
@@ -178,9 +181,11 @@ public class ArrayDeque<T> {
          test.removeFirst();
          test.removeFirst();
          test.removeFirst();
+         a = test.get(3);
          test.removeFirst();
          test.removeFirst();
          test.removeFirst();
+         a = test.get(5);
          test.removeFirst();
          test.removeFirst();
          test.removeFirst();

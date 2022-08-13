@@ -156,11 +156,15 @@ public class ArrayDeque<T> {
          }
          return ans;
      }
-     public T get(int index) {
+     public T get(int index) { /**没考虑加出范围要回归的问题*/
         if (index >= size) {
             return null;
         }
-        return array[fptr + index];
+        int ans = fptr + index;
+        if (ans >= this.array.length)
+            ans = ans - this.array.length;
+        return array[ans];
+        //return array[fptr + index];
      }
      private static void main(String[] args)
      {

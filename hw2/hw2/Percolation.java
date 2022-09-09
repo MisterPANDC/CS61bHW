@@ -5,10 +5,10 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 public class Percolation {
     private int n;
     private int open_number = 0;
-    int[] squar = new int[100000];
-    WeightedQuickUnionUF dset ;
+    private int[] squar = new int[100000];
+    private WeightedQuickUnionUF dset ;
     public Percolation(int N){ //用disjoint set 表示 row i column j 表示为 N*i+j
-        int n = N;
+        n = N;
         if(n <= 0){
             throw new java.lang.IllegalArgumentException();
         }

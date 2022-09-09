@@ -5,11 +5,11 @@ public class PercolationStats {
     private int n;
     private int t;
     private PercolationFactory p;
-    private double [] xs = new double [5000000];
+    private double [] xs = new double [2000000];
     public PercolationStats(int N, int T, PercolationFactory pf) {  // perform T independent experiments on an N-by-N grid
         n = N;
         t = T;
-        if(n < 0 || t < 0){
+        if(n <= 0 || t <= 0){
             throw new java.lang.IllegalArgumentException();
         }
         //p = pf;//对于help method 的使用仍有问题

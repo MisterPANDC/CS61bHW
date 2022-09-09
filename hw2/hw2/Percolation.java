@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 public class Percolation {
     private int n;
     private int open_number = 0;
-    private int[] squar = new int[1000000];
+    private int[] squar = new int[10000000];
     private WeightedQuickUnionUF dset ;
     public Percolation(int N){ //用disjoint set 表示 row i column j 表示为 N*i+j
         n = N;

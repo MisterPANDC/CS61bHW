@@ -5,7 +5,7 @@ public class PercolationStats {
     private int n;
     private int t;
     private PercolationFactory p;
-    private double [] xs = new double [100000];
+    private double [] xs = new double [1000000];
     public PercolationStats(int N, int T, PercolationFactory pf) {  // perform T independent experiments on an N-by-N grid
         n = N;
         t = T;
@@ -37,11 +37,11 @@ public class PercolationStats {
         }
     }
     public double mean(){ // sample mean of percolation threshold
-        double ans = StdStats.mean(xs,0,n);
+        double ans = StdStats.mean(xs,1,t + 1);
         return ans;
     }
     public double stddev() {// sample standard deviation of percolation threshold
-        double ans = StdStats.stddev(xs,0,n);
+        double ans = StdStats.stddev(xs,1,t + 1);
         return ans;
     }
     public double confidenceLow() {                                 // low endpoint of 95% confidence interval

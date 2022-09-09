@@ -6,11 +6,10 @@ public class PercolationStats {
     private int t;
     private PercolationFactory p;
     private double [] xs = new double [5000000];
-    private int[] c;
     public PercolationStats(int N, int T, PercolationFactory pf) {  // perform T independent experiments on an N-by-N grid
         n = N;
         t = T;
-        if(n <= 0 || t <= 0){
+        if(n < 0 || t < 0){
             throw new java.lang.IllegalArgumentException();
         }
         //p = pf;//对于help method 的使用仍有问题
@@ -38,31 +37,26 @@ public class PercolationStats {
                 }*/
             }
             xs[i] = p.numberOfOpenSites();
-            c[i] = p.numberOfOpenSites();
         }
     }
     public double mean(){ // sample mean of percolation threshold
-        return StdStats.mean(c);
-        //double ans = StdStats.mean(xs,1,t + 1);
-        //return ans;
+        double ans = StdStats.mean(xs,1,t + 1);
+        return ans;
     }
     public double stddev() {// sample standard deviation of percolation threshold
-        return StdStats.stddev(c);
-        //double ans = StdStats.stddev(xs,1,t + 1);
-        //return ans;
+        double ans = StdStats.stddev(xs,1,t + 1);
+        return ans;
     }
     public double confidenceLow() {                                 // low endpoint of 95% confidence interval
         double mean = this.mean();
         double stddev = this.stddev();
-        //double ans = mean - 1.96 * stddev / (Math.sqrt(t));
-        double ans = mean - 1.96 * Math.sqrt(stddev/t);
+        double ans = mean - 1.96 * stddev / (Math.sqrt(t));
         return ans;
     }
     public double confidenceHigh() {                                 // high endpoint of 95% confidence interval
         double mean = this.mean();
         double stddev = this.stddev();
-        //double ans = mean + 1.96 * stddev / (Math.sqrt(t));
-        double ans = mean + 1.96 * Math.sqrt(stddev/t);
+        double ans = mean + 1.96 * stddev / (Math.sqrt(t));
         return ans;
     }
     private static void main(String[] args){

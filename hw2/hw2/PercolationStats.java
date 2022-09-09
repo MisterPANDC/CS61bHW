@@ -5,13 +5,15 @@ public class PercolationStats {
     private int n;
     private int t;
     private PercolationFactory p;
-    private double [] xs = new double [2000000];
+    //private double [] xs = new double [2000000];
+    private double [] xs;
     public PercolationStats(int N, int T, PercolationFactory pf) {  // perform T independent experiments on an N-by-N grid
         n = N;
         t = T;
         if(n <= 0 || t <= 0){
             throw new java.lang.IllegalArgumentException();
         }
+        xs = new double [t];
         //p = pf;//对于help method 的使用仍有问题
         //Percolation p = pf.make(n);
         for(int i = 1 ; i <= t ; i = i + 1){
@@ -40,11 +42,13 @@ public class PercolationStats {
         }
     }
     public double mean(){ // sample mean of percolation threshold
-        double ans = StdStats.mean(xs,1,t + 1);
+        //double ans = StdStats.mean(xs,1,t + 1);
+        double ans = StdStats.mean(xs);
         return ans;
     }
     public double stddev() {// sample standard deviation of percolation threshold
-        double ans = StdStats.stddev(xs,1,t + 1);
+        //double ans = StdStats.stddev(xs,1,t + 1);
+        double ans = StdStats.stddev(xs);
         return ans;
     }
     public double confidenceLow() {                                 // low endpoint of 95% confidence interval

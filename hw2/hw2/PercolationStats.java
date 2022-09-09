@@ -5,7 +5,7 @@ public class PercolationStats {
     private int n;
     private int t;
     private PercolationFactory p;
-    private int [] xs = new int [10000];
+    private double [] xs = new double [100000];
     public PercolationStats(int N, int T, PercolationFactory pf) {  // perform T independent experiments on an N-by-N grid
         n = N;
         t = T;
@@ -19,6 +19,7 @@ public class PercolationStats {
                 int row = StdRandom.uniform(n);//需不需要重新设置随机数种子
                 int col = StdRandom.uniform(n);
                 //test
+                //System.out.println(p.numberOfOpenSites());
                 //System.out.print("row is ");
                 //System.out.println(row);
                 //System.out.print("col is ");
@@ -30,35 +31,35 @@ public class PercolationStats {
                         System.out.print(" ");
                     }
                     System.out.println(" ");
-                }
-                */
-
+                }*/
             }
             xs[i] = p.numberOfOpenSites();
         }
     }
     public double mean(){ // sample mean of percolation threshold
-        double ans = StdStats.mean(xs);
+        double ans = StdStats.mean(xs,0,n);
         return ans;
     }
     public double stddev() {// sample standard deviation of percolation threshold
-        double ans = StdStats.stddev(xs);
+        double ans = StdStats.stddev(xs,0,n);
         return ans;
     }
     public double confidenceLow() {                                 // low endpoint of 95% confidence interval
         double mean = this.mean();
         double stddev = this.stddev();
-        double ans = mean - 1.96*stddev/(Math.sqrt(t));
+        double ans = mean - 1.96 * stddev / (Math.sqrt(t));
         return ans;
     }
     public double confidenceHigh() {                                 // high endpoint of 95% confidence interval
         double mean = this.mean();
         double stddev = this.stddev();
-        double ans = mean + 1.96*stddev/(Math.sqrt(t));
+        double ans = mean + 1.96 * stddev / (Math.sqrt(t));
         return ans;
     }
-    public static void main(String[] args){
+    private static void main(String[] args){
         PercolationFactory p = new PercolationFactory();
         PercolationStats per = new PercolationStats(10,1,p);
+        double m = per.mean();
+        System.out.println();
     }
 }

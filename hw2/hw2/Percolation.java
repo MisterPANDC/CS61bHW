@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 public class Percolation {
     private int n;
     private int open_number = 0;
-    private int[] squar = new int[100000];
+    private int[] squar = new int[1000000];
     private WeightedQuickUnionUF dset ;
     public Percolation(int N){ //用disjoint set 表示 row i column j 表示为 N*i+j
         n = N;
@@ -18,8 +18,13 @@ public class Percolation {
         dset = new WeightedQuickUnionUF(n * n + 2);//n^2 is virtual top site n^2+1=virtual bottom site
     } // create N-by-N grid, with all sites initially blocked
     public void open(int row, int col) {       // open the site (row, col) if it is not open already
-        open_number = open_number + 1;
+        if(row < 0 || col < 0 || row > n - 1 || col > n-1){
+            throw new java.lang.IndexOutOfBoundsException();
+        }
+        //注意，也许不会只打开一次！
         int index = n * row + col;
+        if(squar[index] == 1) return;
+        open_number = open_number + 1;
         squar[index] = 1;// open
         if(row == 0){
             //squar[index] = 2;//full
@@ -60,13 +65,19 @@ public class Percolation {
             throw new java.lang.IndexOutOfBoundsException();
         }
         if(row < 0 || col < 0){
-            throw new java.lang.IllegalArgumentException();
+            throw new java.lang.IndexOutOfBoundsException();
         }
         int index = n * row + col;
         if(squar[index] == 1) return true;
         else return false;
     }
     public boolean isFull(int row, int col) {  // is the site (row, col) full?
+        if(row > n-1 || col > n-1){
+            throw new java.lang.IndexOutOfBoundsException();
+        }
+        if(row < 0 || col < 0){
+            throw new java.lang.IndexOutOfBoundsException();
+        }
         int index = n * row + col;
         if(dset.connected(index,n * n)){
             return true;

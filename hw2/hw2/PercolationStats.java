@@ -13,7 +13,7 @@ public class PercolationStats {
         if(n <= 0 || t <= 0){
             throw new java.lang.IllegalArgumentException();
         }
-        xs = new double [t];
+        xs = new double [T];
         //p = pf;//对于help method 的使用仍有问题
         //Percolation p = pf.make(n);
         for(int i = 1 ; i <= t ; i = i + 1){
@@ -38,7 +38,8 @@ public class PercolationStats {
                     System.out.println(" ");
                 }*/
             }
-            xs[i] = p.numberOfOpenSites();
+            //xs[i] = p.numberOfOpenSites();
+            xs[i] = p.numberOfOpenSites()/(N*N);
         }
     }
     public double mean(){ // sample mean of percolation threshold

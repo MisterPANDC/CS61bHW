@@ -1,3 +1,4 @@
+
 package hw2;
 import edu.princeton.cs.introcs.StdRandom;
 import edu.princeton.cs.introcs.StdStats;
@@ -5,15 +6,13 @@ public class PercolationStats {
     private int n;
     private int t;
     private PercolationFactory p;
-    //private double [] xs = new double [2000000];
-    private double [] xs;
+    private double [] xs = new double [2000000];
     public PercolationStats(int N, int T, PercolationFactory pf) {  // perform T independent experiments on an N-by-N grid
         n = N;
         t = T;
         if(n <= 0 || t <= 0){
             throw new java.lang.IllegalArgumentException();
         }
-        xs = new double [T];
         //p = pf;//对于help method 的使用仍有问题
         //Percolation p = pf.make(n);
         for(int i = 1 ; i <= t ; i = i + 1){
@@ -38,18 +37,15 @@ public class PercolationStats {
                     System.out.println(" ");
                 }*/
             }
-            //xs[i] = p.numberOfOpenSites();
-            xs[i] = p.numberOfOpenSites()/(N*N);
+            xs[i] = (double) p.numberOfOpenSites()/(N*N);
         }
     }
     public double mean(){ // sample mean of percolation threshold
-        //double ans = StdStats.mean(xs,1,t + 1);
-        double ans = StdStats.mean(xs);
+        double ans = StdStats.mean(xs,1,t + 1);
         return ans;
     }
     public double stddev() {// sample standard deviation of percolation threshold
-        //double ans = StdStats.stddev(xs,1,t + 1);
-        double ans = StdStats.stddev(xs);
+        double ans = StdStats.stddev(xs,1,t + 1);
         return ans;
     }
     public double confidenceLow() {                                 // low endpoint of 95% confidence interval
